@@ -1,0 +1,59 @@
+<!--
+File: supplies.html
+Purpose: Packing supplies storefront + sticky cart (localStorage) with totals.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Supplies • SwiftShip</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="apple.css" />
+</head>
+<body class="page">
+<header class="site-header glass">
+  <div class="container header-row">
+    <a class="brand" href="index.html"><span class="logo-dot"></span><span>SwiftShip</span></a>
+    <button id="navToggle" class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <nav class="site-nav" data-nav>
+      <a href="index.html">Home</a>
+      <a href="book.html">Book</a>
+      <a href="track.html">Track</a>
+      <a class="active" href="supplies.html">Supplies</a>
+      <a class="cta" href="auth.html">Login</a>
+    </nav>
+  </div>
+</header>
+
+<main class="section">
+  <div class="container">
+    <header class="section-head">
+      <h1 class="grad-text-sm">Packing Supplies</h1>
+      <p class="muted">Quality materials to keep your items safe.</p>
+    </header>
+
+    <div class="grid cards-3" id="products">
+      <!-- Products injected by JS -->
+    </div>
+
+    <aside class="cart glass">
+      <h3>Your Cart</h3>
+      <div id="cartItems" class="stack-3"></div>
+      <div class="cart-bar">
+        <div>
+          <small class="muted">Total</small>
+          <div id="cartTotal" class="quote-amount">$0.00</div>
+        </div>
+        <button class="btn btn-primary" id="checkoutBtn" type="button">Checkout</button>
+      </div>
+      <p id="cartMsg" class="muted"></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer"><div class="container"><small class="muted">© <span id="y"></span> SwiftShip Inc.</small></div></footer>
+<script src="app.js"></script>
+</body>
+</html>

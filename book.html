@@ -1,0 +1,111 @@
+<!--
+File: book.html
+Purpose: Full booking flow with live price estimate and confirmation (demo).
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Book • SwiftShip</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="apple.css" />
+</head>
+<body class="page">
+<header class="site-header glass">
+  <div class="container header-row">
+    <a class="brand" href="index.html"><span class="logo-dot"></span><span>SwiftShip</span></a>
+    <button id="navToggle" class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <nav class="site-nav" data-nav>
+      <a href="index.html">Home</a>
+      <a class="active" href="book.html">Book</a>
+      <a href="track.html">Track</a>
+      <a href="supplies.html">Supplies</a>
+      <a class="cta" href="auth.html">Login</a>
+    </nav>
+  </div>
+</header>
+
+<main class="section">
+  <div class="container narrow">
+    <header class="section-head">
+      <h1 class="grad-text-sm">Book a Pickup</h1>
+      <p class="muted">Tell us what, where, and when. We’ll handle the how.</p>
+    </header>
+
+    <form id="bookingForm" class="card glass stack-6">
+      <div class="grid two">
+        <label>
+          <span>Pickup address</span>
+          <input name="pickup" required placeholder="Street, City, ZIP">
+        </label>
+        <label>
+          <span>Drop-off address</span>
+          <input name="drop" required placeholder="Street, City, ZIP">
+        </label>
+      </div>
+
+      <div class="grid two">
+        <label>
+          <span>Package weight (kg)</span>
+          <input name="kg" type="number" min="0.1" step="0.1" required placeholder="e.g. 3.4">
+        </label>
+        <label>
+          <span>Dimensions (L × W × H cm)</span>
+          <input name="dims" required placeholder="e.g. 30 × 20 × 15">
+        </label>
+      </div>
+
+      <div class="grid two">
+        <label>
+          <span>Service level</span>
+          <select name="service">
+            <option value="express">Express</option>
+            <option value="standard" selected>Standard</option>
+            <option value="economy">Economy</option>
+          </select>
+        </label>
+        <label>
+          <span>Distance band</span>
+          <select name="zone">
+            <option value="local">Local (&lt;50 km)</option>
+            <option value="regional">Regional (50–500 km)</option>
+            <option value="national">National (&gt;500 km)</option>
+            <option value="international">International</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="grid two">
+        <label>
+          <span>Pickup date</span>
+          <input name="date" type="date" required>
+        </label>
+        <label>
+          <span>Pickup time</span>
+          <input name="time" type="time" required>
+        </label>
+      </div>
+
+      <label>
+        <span>Notes (optional)</span>
+        <textarea name="notes" rows="3" placeholder="Gate code, fragile, leave with guard, etc."></textarea>
+      </label>
+
+      <div class="quote-bar">
+        <div>
+          <small class="muted">Estimated price</small>
+          <div id="quote" class="quote-amount">—</div>
+        </div>
+        <button class="btn btn-primary" type="submit">Confirm Booking</button>
+      </div>
+      <p id="bookOut" class="muted"></p>
+    </form>
+  </div>
+</main>
+
+<footer class="site-footer"><div class="container"><small class="muted">© <span id="y"></span> SwiftShip Inc.</small></div></footer>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+/*
+File: styles.css
+Purpose: Global theme (colors, typography), layout utilities, components, animations.
+Design: Dark, glassmorphism accents, gradient hero text, soft shadows, rounded corners.
+Major Blocks:
+  • :root variables (colors, radii, shadows)
+  • Base resets + body fade-in
+  • Layout helpers (.container, .section, .grid, .stack-*)
+  • Header/nav (.site-header, .site-nav, .nav-toggle)
+  • Hero section (orbs, gradients, @keyframes floaty)
+  • Cards + CTAs (.card, .hover-raise, .btn, .btn-primary, .btn-ghost)
+  • Forms (inputs, focus rings, .quote-bar/.quote-amount)
+  • Progress + timeline components
+  • Cart UI (.cart, .cart-item, .cart-bar)
+  • Tabs (.tabs, .tab, .tabpanel)
+  • Footer (.site-footer)
+  • Scroll reveal (.reveal, .reveal-in)
+Responsive: Breakpoints ~980px/880px/640px for grids and nav.
+*/
+
+:root{
+  --bg:#0b1020;
+  --bg-2:#0f1428;
+  --text:#e9f1ff;
+  --muted:#a8b2d1;
+  --brand:#5aa2ff;
+  --accent:#8b5cf6;
+  --card:rgba(255,255,255,0.06);
+  --glass:rgba(255,255,255,0.08);
+  --outline:rgba(255,255,255,0.15);
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --radius:22px;
+}
+
+/* Base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background:
+    radial-gradient(1200px 700px at 10% -10%, rgba(90,162,255,.12), transparent 60%),
+    radial-gradient(1000px 600px at 110% 10%, rgba(139,92,246,.12), transparent 60%),
+    linear-gradient(180deg, var(--bg), var(--bg-2));
+  color:var(--text);
+  line-height:1.4;
+  opacity:0; transform:translateY(6px);
+  transition:opacity .5s ease, transform .5s ease;
+}
+body.ready{opacity:1; transform:none}
+a{color:inherit; text-decoration:none}
+img{max-width:100%; display:block}
+code{background:rgba(255,255,255,.06); padding:.15rem .4rem; border-radius:8px}
+
+/* Layout helpers */
+.container{width:min(1160px, 92vw); margin-inline:auto}
+.narrow{width:min(760px, 94vw); margin-inline:auto}
+.section{padding:64px 0}
+.section.alt{background:linear-gradient(180deg, transparent, rgba(255,255,255,.04))}
+.section-head{margin-bottom:28px}
+.split{display:grid; gap:24px; grid-template-columns: 1.2fr .8fr}
+@media (max-width: 900px){ .split{grid-template-columns:1fr} }
+
+.grid{display:grid; gap:22px}
+.grid.two{grid-template-columns: 1fr 1fr}
+@media (max-width: 820px){ .grid.two{grid-template-columns:1fr} }
+.grid.cards-3{grid-template-columns: repeat(3,minmax(0,1fr))}
+@media (max-width: 980px){ .grid.cards-3{grid-template-columns:1fr 1fr} }
+@media (max-width: 640px){ .grid.cards-3{grid-template-columns:1fr} }
+
+.stack-3>*+*{margin-top:12px}
+.stack-4>*+*{margin-top:14px}
+.stack-6>*+*{margin-top:18px}
+
+.muted{color:var(--muted)}
+.grad-text{
+  background:linear-gradient(90deg, var(--text), #c5d7ff 40%, var(--brand) 60%, var(--accent));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  font-size: clamp(40px, 6vw, 68px); line-height:1.05; font-weight:800; letter-spacing:-0.02em;
+}
+.grad-text-sm{
+  background:linear-gradient(90deg, #cfe0ff, var(--brand) 60%, var(--accent));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  font-size: clamp(28px, 3.2vw, 42px); font-weight:800; letter-spacing:-0.02em;
+}
+
+/* Header */
+.site-header{position:sticky; top:0; z-index:50; backdrop-filter:blur(14px)}
+.glass{
+  background:var(--glass);
+  border:1px solid var(--outline);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.header-row{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:10px 14px; margin-top:10px}
+.brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
+.brand .logo{width:28px; height:28px}
+.logo-dot{width:12px; height:12px; border-radius:50%; background:linear-gradient(90deg, var(--brand), var(--accent)); display:inline-block}
+
+.site-nav{display:flex; align-items:center; gap:16px}
+.site-nav a{padding:8px 12px; border-radius:12px; opacity:.9}
+.site-nav a:hover{background:rgba(255,255,255,.06); opacity:1}
+.site-nav .active{background:rgba(255,255,255,.09)}
+.site-nav .cta{background:linear-gradient(90deg, var(--brand), var(--accent)); color:#0b0f19; font-weight:700}
+
+.nav-toggle{display:none; background:none; border:0}
+.nav-toggle span{display:block; width:24px; height:2px; background:#cfe0ff; margin:5px 0; transition:.25s}
+@media (max-width: 880px){
+  .nav-toggle{display:inline-block}
+  .site-nav{position:fixed; right:16px; top:62px; flex-direction:column; padding:10px; display:none}
+  .site-nav.open{display:flex}
+}
+
+/* Hero */
+.hero{position:relative; padding:76px 0 40px}
+.hero-grid{display:grid; gap:28px; grid-template-columns:1.15fr .85fr}
+@media (max-width: 980px){ .hero-grid{grid-template-columns:1fr} }
+.hero-copy .lead{font-size:1.15rem; color:#dbe6ff; max-width:50ch}
+.hero-actions{display:flex; gap:12px; margin-top:14px}
+.hero-bullets{margin:16px 0 0; padding:0 0 0 20px}
+
+.bg-orb{position:absolute; filter:blur(24px); opacity:.5; animation:floaty 16s ease-in-out infinite alternate}
+.orb-1{width:420px; height:420px; left:-80px; top:-60px; background:radial-gradient(closest-side, rgba(90,162,255,.7), transparent)}
+.orb-2{width:360px; height:360px; right:-80px; top:40px; background:radial-gradient(closest-side, rgba(139,92,246,.6), transparent)}
+@keyframes floaty{
+  from{transform:translateY(0) translateX(0)}
+  to{transform:translateY(-26px) translateX(18px)}
+}
+
+/* Cards */
+.card{
+  background:var(--card);
+  border:1px solid var(--outline);
+  border-radius:var(--radius);
+  padding:18px;
+}
+.hover-raise{transition:transform .25s ease, box-shadow .25s ease}
+.hover-raise:hover{transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.card .link{display:inline-block; margin-top:6px; color:#dbe6ff}
+.card-icon{font-size:28px; margin-bottom:8px}
+
+/* Forms */
+label{display:flex; flex-direction:column; gap:6px; font-weight:600}
+input, select, textarea{
+  appearance:none; border:1px solid var(--outline); background:rgba(255,255,255,.04);
+  color:var(--text); padding:12px 12px; border-radius:14px; outline:none; font:inherit;
+}
+input:focus, select:focus, textarea:focus{border-color:rgba(138,180,255,.9); box-shadow:0 0 0 4px rgba(90,162,255,.18)}
+button, .btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  border-radius:16px; padding:12px 16px; border:1px solid var(--outline); cursor:pointer; font-weight:700;
+  background:rgba(255,255,255,.08); color:var(--text); transition:transform .15s ease, filter .2s ease, background .2s ease;
+}
+.btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.12)}
+.btn-primary{background:linear-gradient(90deg, var(--brand), var(--accent)); color:#0b0f19; border:none}
+.btn-ghost{background:transparent; border-color:var(--outline)}
+
+.hero-card h3{margin:0 0 8px}
+.quote-out{min-height:1.3em; font-weight:700}
+.quote-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:14px; border:1px dashed var(--outline); border-radius:16px; background:rgba(255,255,255,.04)
+}
+.quote-amount{font-size:1.4rem; font-weight:800}
+
+/* Progress + timeline */
+.progress{height:8px; background:rgba(255,255,255,.06); border-radius:999px; overflow:hidden}
+.progress-bar{height:100%; background:linear-gradient(90deg, var(--brand), var(--accent))}
+.timeline{display:grid; gap:12px; margin-top:8px}
+.timeline-item{display:grid; grid-template-columns:22px 1fr; gap:10px; align-items:start}
+.timeline-dot{width:10px; height:10px; border-radius:50%; margin-top:6px; background:linear-gradient(90deg, var(--brand), var(--accent))}
+.timeline-text small{color:var(--muted)}
+
+/* Cart */
+.cart{
+  position:sticky; top:94px; margin-top:24px; padding:18px; border-radius:var(--radius);
+}
+.cart-item{display:grid; grid-template-columns: 1fr auto auto; gap:8px; align-items:center; padding:10px; border:1px solid var(--outline); border-radius:12px}
+.cart-item .qty{display:flex; gap:8px; align-items:center}
+.cart-item button{padding:6px 10px}
+.cart-bar{display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:12px}
+
+/* Tabs */
+.tabs{display:flex; gap:6px; padding:6px}
+.tab{flex:1; padding:10px; border-radius:12px; border:1px solid var(--outline); background:rgba(255,255,255,.04); cursor:pointer; font-weight:700}
+.tab.active{background:linear-gradient(90deg, var(--brand), var(--accent)); color:#0b0f19; border:none}
+.tabpanel.hidden{display:none}
+
+/* Footer */
+.site-footer{padding:36px 0 60px}
+.footer-grid{display:grid; gap:14px; grid-template-columns: 1.5fr 1fr 1fr}
+.footer-nav{display:flex; gap:12px; flex-wrap:wrap}
+.brand.small .logo{width:20px; height:20px}
+
+/* Reveal on scroll */
+.reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease}
+.reveal.reveal-in{opacity:1; transform:none}
+
+/* Utility */
+.btn:active{transform:translateY(0)}
+.link{color:#cfe0ff; text-decoration:underline}
+
+/*
+File: minimal.css
+Purpose: Apple-like visual pass — neutral palette, subtle borders, less color,
+         simpler motion, system font stack. Designed to override styles.css.
+How: Link this AFTER styles.css in each HTML file, or paste at the bottom of styles.css.
+*/
+
+:root{
+  /* Neutral, airy */
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --ink: #1d1d1f;          /* Primary text */
+  --muted: #6e6e73;        /* Secondary text */
+  --brand: #0071e3;        /* Subtle blue for CTAs/links */
+  --outline: #e5e5ea;      /* Hairline borders */
+  --shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.04);
+  --radius: 14px;
+}
+
+/* Dark mode support if the OS is dark */
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#000000;
+    --surface:#1c1c1e;
+    --ink:#f5f5f7;
+    --muted:#a1a1a6;
+    --outline:#2c2c2e;
+    --shadow: 0 1px 3px rgba(0,0,0,.5), 0 8px 24px rgba(0,0,0,.6);
+  }
+}
+
+/* Base reset toward Apple feel */
+body{
+  background: var(--bg) !important;
+  color: var(--ink) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Arial, sans-serif !important;
+  letter-spacing: 0 !important;
+  transition: opacity .25s ease, transform .25s ease !important; /* gentler */
+}
+
+/* Kill colorful hero background & orbs */
+.bg-orb{ display:none !important; }
+
+/* Header: translucent, hairline bottom border, no glassy tint */
+.site-header{
+  background: color-mix(in oklab, var(--surface) 80%, transparent) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.header-row{ margin-top: 0 !important; border-bottom: 1px solid var(--outline); }
+
+/* Brand + nav: quieter */
+.site-nav a{
+  border-radius: 10px;
+  opacity: 1 !important;
+}
+.site-nav .active{ background: transparent !important; text-decoration: underline; text-underline-offset: 4px; }
+.site-nav .cta{
+  background: #111 !important; color: #fff !important; border: none !important;
+}
+
+/* Typography: remove gradients; go solid ink */
+.grad-text,
+.grad-text-sm{
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  color: var(--ink) !important;
+  font-weight: 700 !important;
+}
+
+/* Sections: a bit less vertical padding */
+.section{ padding: 56px 0 !important; }
+.section.alt{ background: transparent !important; }
+
+/* Cards: white surfaces, hairline borders, minimal hover */
+.card{
+  background: var(--surface) !important;
+  border: 1px solid var(--outline) !important;
+  box-shadow: var(--shadow) !important;
+}
+.hover-raise{ transition: transform .18s ease, box-shadow .18s ease !important; }
+.hover-raise:hover{ transform: translateY(-2px) !important; }
+
+/* Buttons: primary = black; ghost = hairline border; link-blue accents */
+.btn{
+  border: 1px solid var(--outline) !important;
+  background: transparent !important;
+  color: var(--ink) !important;
+  border-radius: 12px !important;
+  padding: 10px 14px !important;
+}
+.btn:hover{ background: #f5f5f7 !important; }
+.btn-primary{
+  background: #111 !important;
+  color: #fff !important;
+  border: 1px solid #111 !important;
+}
+.btn-ghost{
+  background: transparent !important;
+  border: 1px solid var(--outline) !important;
+}
+a.link{ color: var(--brand) !important; text-decoration: none; }
+a.link:hover{ text-decoration: underline; }
+
+/* Forms: simpler fields & focus */
+input, select, textarea{
+  background: #fff !important;
+  border: 1px solid var(--outline) !important;
+  color: var(--ink) !important;
+  border-radius: 12px !important;
+}
+input:focus, select:focus, textarea:focus{
+  border-color: #c7c7cc !important;
+  box-shadow: 0 0 0 3px rgba(0,113,227,.12) !important; /* soft blue ring */
+}
+
+/* Quote bar & totals: thin borders, white bg */
+.quote-bar{
+  background: #fff !important;
+  border: 1px solid var(--outline) !important;
+}
+.quote-amount{ font-weight: 700 !important; }
+
+/* Progress & timeline: quiet neutrals, blue accent */
+.progress{ background: #f2f2f7 !important; }
+.progress-bar{ background: var(--brand) !important; }
+.timeline-dot{
+  background: var(--brand) !important;
+}
+.timeline-text small{ color: var(--muted) !important; }
+
+/* Footer: hairline top rule */
+.site-footer{
+  border-top: 1px solid var(--outline);
+  padding: 36px 0 60px;
+}
+
+/* Spacing & grids: a touch more air on narrow */
+.container{ width: min(1080px, 92vw) !important; }
+.narrow{ width: min(740px, 94vw) !important; }
+
+/* Optional: make service cards icon-free for stricter minimalism */
+.card-icon{ display:none !important; }

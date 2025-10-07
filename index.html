@@ -1,0 +1,172 @@
+<!--
+File: index.html
+Purpose: Home page. Sticky header/nav, hero with CTAs, Quick Quote, Quick Track,
+         services cards, and footer. Apple-style via apple.css override.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SwiftShip • Logistics & Courier</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="apple.css" />
+</head>
+<body class="page">
+  <!-- Header -->
+  <header class="site-header glass">
+    <div class="container header-row">
+      <a class="brand" href="index.html" aria-label="SwiftShip home">
+        <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stop-color="var(--brand)"/>
+              <stop offset="100%" stop-color="var(--brand)"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#g)" d="M8 40c9-9 21-15 34-16l4-10 10 4-5 12c6 4 9 8 9 10-1 6-17 2-28 5-15 4-26 7-28 1-1-3 1-6 4-6z"/>
+        </svg>
+        <span>SwiftShip</span>
+      </a>
+
+      <button id="navToggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="site-nav" data-nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="book.html">Book</a>
+        <a href="track.html">Track</a>
+        <a href="supplies.html">Supplies</a>
+        <a class="cta" href="auth.html">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="container hero-grid">
+      <div class="hero-copy reveal">
+        <h1 class="grad-text">Ship faster.<br/>Track smarter.</h1>
+        <p class="lead">Premium logistics for people who value speed, reliability, and beautiful experiences.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="book.html">Book a Pickup</a>
+          <a class="btn btn-ghost" href="track.html">Track a Package</a>
+        </div>
+
+        <ul class="hero-bullets">
+          <li>Same-day metro delivery</li>
+          <li>National 24–48h express</li>
+          <li>Live location tracking</li>
+        </ul>
+      </div>
+
+      <aside class="hero-card glass reveal">
+        <h3>Quick Quote</h3>
+        <form id="miniQuote" class="stack-4">
+          <label>
+            <span>From</span>
+            <input required name="from" placeholder="Pickup address">
+          </label>
+          <label>
+            <span>To</span>
+            <input required name="to" placeholder="Drop-off address">
+          </label>
+          <label>
+            <span>Weight (kg)</span>
+            <input required type="number" step="0.1" min="0.1" name="kg" placeholder="e.g. 2.5">
+          </label>
+          <label>
+            <span>Distance</span>
+            <select name="zone">
+              <option value="local">Local (&lt;50 km)</option>
+              <option value="regional">Regional (50–500 km)</option>
+              <option value="national">National (&gt;500 km)</option>
+              <option value="international">International</option>
+            </select>
+          </label>
+          <button class="btn btn-primary" type="submit">Estimate</button>
+          <p id="miniQuoteOut" class="quote-out" aria-live="polite"></p>
+        </form>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section">
+    <div class="container">
+      <header class="section-head reveal">
+        <h2 class="grad-text-sm">Services built for momentum</h2>
+        <p class="muted">From urgent docs to bulky parcels — we’ve got lanes for it all.</p>
+      </header>
+
+      <div class="grid cards-3">
+        <article class="card hover-raise reveal">
+          <div class="card-icon">🚀</div>
+          <h3>Express Courier</h3>
+          <p>Same-day within city limits, with live ETA updates and doorstep pickup.</p>
+          <a href="book.html" class="link">Book now →</a>
+        </article>
+
+        <article class="card hover-raise reveal">
+          <div class="card-icon">📦</div>
+          <h3>Nationwide Parcels</h3>
+          <p>48-hour delivery across major hubs. Smart routing for fewer hops.</p>
+          <a href="book.html" class="link">Ship a parcel →</a>
+        </article>
+
+        <article class="card hover-raise reveal">
+          <div class="card-icon">🌍</div>
+          <h3>International</h3>
+          <p>Door-to-door customs-cleared shipping to 180+ countries.</p>
+          <a href="book.html" class="link">Start international →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tracking teaser -->
+  <section class="section alt">
+    <div class="container split">
+      <div class="reveal">
+        <h2 class="grad-text-sm">Know exactly where your package is</h2>
+        <p class="muted">Real-time status, route milestones, and delivery window predictions.</p>
+        <a class="btn btn-ghost" href="track.html">Open Tracker</a>
+      </div>
+      <form id="miniTrack" class="glass stack-4 reveal" aria-label="Quick tracking">
+        <label>
+          <span>Tracking Number</span>
+          <input required name="tn" id="tn" placeholder="e.g. SS784392615">
+        </label>
+        <button class="btn btn-primary" type="submit">Track</button>
+        <div id="miniTrackOut" class="timeline"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand small">
+          <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><use href="#"/></svg>
+          <span>SwiftShip</span>
+        </div>
+        <p class="muted">Logistics you’ll actually love using.</p>
+      </div>
+      <nav class="footer-nav">
+        <a href="book.html">Book</a>
+        <a href="track.html">Track</a>
+        <a href="supplies.html">Supplies</a>
+        <a href="auth.html">Login</a>
+      </nav>
+      <small class="muted">© <span id="y"></span> SwiftShip Inc.</small>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

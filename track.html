@@ -1,0 +1,54 @@
+<!--
+File: track.html
+Purpose: Tracking input + progress bar + event timeline (demo data).
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Track • SwiftShip</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="apple.css" />
+</head>
+<body class="page">
+<header class="site-header glass">
+  <div class="container header-row">
+    <a class="brand" href="index.html"><span class="logo-dot"></span><span>SwiftShip</span></a>
+    <button id="navToggle" class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <nav class="site-nav" data-nav>
+      <a href="index.html">Home</a>
+      <a href="book.html">Book</a>
+      <a class="active" href="track.html">Track</a>
+      <a href="supplies.html">Supplies</a>
+      <a class="cta" href="auth.html">Login</a>
+    </nav>
+  </div>
+</header>
+
+<main class="section">
+  <div class="container narrow">
+    <header class="section-head">
+      <h1 class="grad-text-sm">Track your package</h1>
+      <p class="muted">Enter your SwiftShip number (e.g. <code>SS784392615</code>).</p>
+    </header>
+
+    <form id="trackForm" class="card glass stack-4">
+      <label>
+        <span>Tracking number</span>
+        <input id="trackingNumber" name="tn" required placeholder="SS#########">
+      </label>
+      <button class="btn btn-primary" type="submit">Track</button>
+      <div class="progress">
+        <div id="trackProgress" class="progress-bar" style="width:0%"></div>
+      </div>
+      <div id="trackResult" class="timeline"></div>
+    </form>
+  </div>
+</main>
+
+<footer class="site-footer"><div class="container"><small class="muted">© <span id="y"></span> SwiftShip Inc.</small></div></footer>
+<script src="app.js"></script>
+</body>
+</html>

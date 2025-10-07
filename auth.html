@@ -1,0 +1,57 @@
+<!--
+File: auth.html
+Purpose: Auth demo (front-end only): Login and Sign Up tabs with basic messages.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Login • SwiftShip</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="apple.css" />
+</head>
+<body class="page">
+<header class="site-header glass">
+  <div class="container header-row">
+    <a class="brand" href="index.html"><span class="logo-dot"></span><span>SwiftShip</span></a>
+    <button id="navToggle" class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <nav class="site-nav" data-nav>
+      <a href="index.html">Home</a>
+      <a href="book.html">Book</a>
+      <a href="track.html">Track</a>
+      <a href="supplies.html">Supplies</a>
+      <a class="active cta" href="auth.html">Login</a>
+    </nav>
+  </div>
+</header>
+
+<main class="section">
+  <div class="container narrow">
+    <div class="tabs glass">
+      <button class="tab active" data-tab="login">Login</button>
+      <button class="tab" data-tab="signup">Sign Up</button>
+    </div>
+
+    <form id="loginForm" class="card glass stack-4 tabpanel" data-panel="login">
+      <label><span>Email</span><input type="email" required name="email" placeholder="you@swiftship.com"></label>
+      <label><span>Password</span><input type="password" required name="pass" placeholder="••••••••"></label>
+      <button class="btn btn-primary" type="submit">Login</button>
+      <p id="loginMsg" class="muted"></p>
+    </form>
+
+    <form id="signupForm" class="card glass stack-4 tabpanel hidden" data-panel="signup">
+      <label><span>Full name</span><input required name="name" placeholder="Jane Doe"></label>
+      <label><span>Email</span><input type="email" required name="email" placeholder="you@swiftship.com"></label>
+      <label><span>Password</span><input type="password" required name="pass" minlength="8" placeholder="min 8 chars"></label>
+      <button class="btn btn-primary" type="submit">Create Account</button>
+      <p id="signupMsg" class="muted"></p>
+    </form>
+  </div>
+</main>
+
+<footer class="site-footer"><div class="container"><small class="muted">© <span id="y"></span> SwiftShip Inc.</small></div></footer>
+<script src="app.js"></script>
+</body>
+</html>
